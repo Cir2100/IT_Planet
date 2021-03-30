@@ -65,6 +65,9 @@ class ArticleActivity : Activity() {
                     "padding: 0;\n" +
                    " margin: 0;\n" +
                     "}\n" +
+                    "iframe {\n" +
+                    "max-width: 100%;\n" +
+                    "}\n" +
                     "  </style>")
             stringBuilder.append("<head>").append(articles[0].select("head").text()).append("</head>").append("<h1>").append(articles[0].select("h1").text()).append("</h1>").append(articles[0].select("div"))
             runOnUiThread {
