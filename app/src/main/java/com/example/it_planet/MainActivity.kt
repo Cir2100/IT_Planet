@@ -65,11 +65,4 @@ class MainActivity : AppCompatActivity() {
             }
         }).start()
     }
-    private fun onItemClick() {
-        //Thread(Runnable {
-        //    runOnUiThread {
-        textView.setText("dfgd")
-        //   }
-        // }).start()
-    }
 }
