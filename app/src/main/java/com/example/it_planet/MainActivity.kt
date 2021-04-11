@@ -30,9 +30,6 @@ class MainActivity : AppCompatActivity() {
             val arrayAdapter: ArrayAdapter<String>
             val parserVKIT = ParserVKIT()
             var strings: MutableList<String> = parserVKIT.getHtmlFromWeb("https://vkist.guap.ru/")
-            strings.addAll(parserVKIT.getHtmlFromWeb("https://vkist.guap.ru/page/2/"))
-            strings.addAll(parserVKIT.getHtmlFromWeb("https://vkist.guap.ru/page/3/"))
-            strings.addAll(parserVKIT.getHtmlFromWeb("https://vkist.guap.ru/page/4/"))
             arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, strings)
             runOnUiThread {
                 listView.adapter = arrayAdapter

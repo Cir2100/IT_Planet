@@ -3,20 +3,34 @@ package com.example.it_planet
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
+import java.io.IOException
 
 class ParserVKIT {
     fun getHtmlFromWeb(url: String): MutableList<String> {
         var index = 0
         val stringBuilder = StringBuilder()
+        val urlBuilder = StringBuilder()
+        urlBuilder.append(url)
         var strings: MutableList<String> = mutableListOf()
-
-        val doc: Document = Jsoup.connect(url).get()
-        val links: Elements = doc.select("article")
-        for (link in links) {
-            stringBuilder.append("\n").append("Link: ").append(link.select("a[href]").attr("href")).append(" \n").append("Text : ").append(link.select("h2").text())
-            strings.add(index, stringBuilder.toString())
-            index++
-            stringBuilder.clear()
+        var page = 1
+        while (true) {
+            if (page > 1) {
+                urlBuilder.clear()
+                urlBuilder.append(url).append("page/").append(page)
+            }
+            try {
+                val doc: Document = Jsoup.connect(urlBuilder.toString()).get()
+                val links: Elements = doc.select("article")
+                for (link in links) {
+                    stringBuilder.append("\n").append("Link: ").append(link.select("a[href]").attr("href")).append(" \n").append("Text : ").append(link.select("h2").text())
+                    strings.add(index, stringBuilder.toString())
+                    index++
+                    stringBuilder.clear()
+                }
+                page++;
+            } catch (e: IOException) {
+                break;
+            }
         }
         return strings
     }
