@@ -5,12 +5,12 @@ import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
 
 class ParserVKIT {
-    fun getHtmlFromWeb(): MutableList<String> {
+    fun getHtmlFromWeb(url: String): MutableList<String> {
         var index = 0
         val stringBuilder = StringBuilder()
         var strings: MutableList<String> = mutableListOf()
 
-        val doc: Document = Jsoup.connect("https://vkist.guap.ru/").get()
+        val doc: Document = Jsoup.connect(url).get()
         val links: Elements = doc.select("article")
         for (link in links) {
             stringBuilder.append("\n").append("Link: ").append(link.select("a[href]").attr("href")).append(" \n").append("Text : ").append(link.select("h2").text())

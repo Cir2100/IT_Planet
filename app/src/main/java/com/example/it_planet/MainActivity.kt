@@ -4,14 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.ListView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
-import org.jsoup.select.Elements
-import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,7 +29,9 @@ class MainActivity : AppCompatActivity() {
         Thread(Runnable {
             val arrayAdapter: ArrayAdapter<String>
             val parserVKIT = ParserVKIT()
-            var strings: MutableList<String> = parserVKIT.getHtmlFromWeb()
+            //val parserPikabu = ParserPikabu()
+            var strings: MutableList<String> = parserVKIT.getHtmlFromWeb("https://vkist.guap.ru/")
+            //trings.addAll(parserPikabu.getHtmlFromWeb())
             arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, strings)
             runOnUiThread {
                 listView.adapter = arrayAdapter
